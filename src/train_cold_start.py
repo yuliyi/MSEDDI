@@ -311,6 +311,8 @@ for fold_i in range(args.fold):
     s1_tup = [t.to(device) if i > 4 else t for i, t in enumerate(s1_tup)]
     s2_tup = [t.to(device) if i > 4 else t for i, t in enumerate(s2_tup)]
 
+    model_kge = models.SMILESformer(d_model=args.vec_dim, dropout=0.3, nhead=1, dim_feedforward=args.vec_dim * 2,
+                                    num_encoder_layers=1, num_decoder_layers=1, seq_len=args.kge_dim)
     model_ddi = models.DDIModel(args)
     model_ddi.to(device=device)
     criterion = torch.nn.CrossEntropyLoss()
